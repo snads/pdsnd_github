@@ -22,7 +22,7 @@ def get_filters():
 
     print('Hello! Let\'s explore some US bikeshare data!')
     print('\nData exists for the following cities: Washington, New York City, and Chicago.')
-    
+
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = input('Which city would you like to see data for? ').lower()
     while city not in cities:
@@ -34,7 +34,7 @@ def get_filters():
     while month not in months:
         print('\nOops, there is no data for {}. Please check your spelling and try again'.format(month))
         month = input('Would you like to see data for January, February, March, April, May, or June. Type "none" for no filter. ').lower()
-        
+
     # get user input for day of week (all, monday, tuesday, ... sunday)
     day = input('\nYou can also filter by day. If you would like to do so, please type in the day: Monday, Tuesday, Wednesday, etc... Type "none" for no day filter. ').lower()
     while day not in days:
@@ -71,7 +71,7 @@ def load_data(city, month, day):
     else:
         print('\nThere is no Bikeshare data for the chosen city. Please restart the program.')
 
-    # If a filter was chosen, then filter database by specified month
+    # If a filter was chosen, then filter database by user specified month
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['Month'] = df['Start Time'].dt.strftime("%B")
     df['Day'] = df['Start Time'].dt.strftime("%A")
@@ -83,7 +83,7 @@ def load_data(city, month, day):
         print('...filtering data by {}...'.format(month.capitalize()))
         df = df[df['Month'] == month.capitalize()]
 
-    # If a day was chosen then filter database by specified day
+    # If a day was chosen then filter database by user specified day
     if day == 'none':
         print('You have not chosen to filter by day. Data for all days will be displayed.')
     else:
@@ -100,9 +100,9 @@ def time_stats(df):
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
-    # display the most common month
+    # display the most common month 
     popular_month = df['Month'].mode()[0]
-    
+
     print('\nThe most popular month of travel was {}.'.format(popular_month))
 
     # display the most common day of week
@@ -117,7 +117,7 @@ def time_stats(df):
 
     #print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-   
+
 
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
@@ -128,14 +128,14 @@ def station_stats(df):
     # display most commonly used start station
     popular_start_station = df['Start Station'].mode()[0]
     start_station_count = len(df[df['Start Station'] == popular_start_station].index)
-    
+
     print('\nMost popular start station: {}\n'.format(popular_start_station))
     print('\nNumber of rentals starting at this station: {}\n'.format(start_station_count))
-    
+
     # display most commonly used end station
     popular_end_station = df['End Station'].mode()[0]
     end_station_count = len(df[df['End Station'] == popular_end_station].index)
-    
+
     print('\nMost popular end station: {}\n'.format(popular_end_station))
     print('\nNumber of rentals ending at this station: {}\n'.format(end_station_count))
 
@@ -185,21 +185,21 @@ def user_stats(df):
         earliest_yob = int(min(df['Birth Year']))
         latest_yob = int(max(df['Birth Year']))
         mode_yob = int(df['Birth Year'].mode()[0])
-        
+
         print('\nThe oldest bikeshare user was born in: ', earliest_yob)
         print('\nThe youngest bikeshare user was born in: ', latest_yob)
         print('\nMost bikeshare users were born in: ', mode_yob)
-        
+
     else:
         print('There is no information about bikeshare users\' birth years in this dataset.')
-        
+
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 def individual_trips(df):
      """Displays individual trip data by 5 trips until user decides to stop."""
-     
+
      yesorno = input('\nWould you like to see individual trip data? Yes or No? ').lower()
      for row in df.iterrows():
          if yesorno == 'yes':
@@ -207,7 +207,7 @@ def individual_trips(df):
              yesorno = input('\nWould you like to see the next trip? Yes or No? ').lower()
          else:
              break
-            
+
 def main():
     while True:
         city, month, day = get_filters()
