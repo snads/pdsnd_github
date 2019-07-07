@@ -10,6 +10,7 @@ cities = ['chicago', 'new york city', 'washington']
 months = ['january', 'february', 'march', 'april', 'may', 'june', 'none']
 days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'none']
 
+# function to get user inputs for choice of city and filtering options
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -46,7 +47,7 @@ def get_filters():
     print('-'*40)
     return city, month, day
 
-
+# fucntion to load data for chosen city
 def load_data(city, month, day):
     """
     Loads data for the specified city and filters by month and day if applicable.
@@ -93,14 +94,14 @@ def load_data(city, month, day):
 
     return df
 
-
+# function to compute time statistics
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
-    # display the most common month 
+    # display the most common month
     popular_month = df['Month'].mode()[0]
 
     print('\nThe most popular month of travel was {}.'.format(popular_month))
@@ -118,7 +119,7 @@ def time_stats(df):
     #print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
+# function to compute station statistics
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
 
@@ -148,7 +149,7 @@ def station_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
+# function to compute trip duration statistics
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
@@ -165,7 +166,7 @@ def trip_duration_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
+# function to compute user stats
 def user_stats(df):
     """Displays statistics on bikeshare users."""
 
@@ -208,6 +209,7 @@ def individual_trips(df):
          else:
              break
 
+# this is the main function of this script. It calls all the above functions.
 def main():
     while True:
         city, month, day = get_filters()
