@@ -10,6 +10,7 @@ cities = ['chicago', 'new york city', 'washington']
 months = ['january', 'february', 'march', 'april', 'may', 'june', 'none']
 days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'none']
 
+# function to get user inputs for choice of city and filtering options
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -22,7 +23,7 @@ def get_filters():
 
     print('Hello! Let\'s explore some US bikeshare data!')
     print('\nData exists for the following cities: Washington, New York City, and Chicago.')
-    
+
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city = input('Which city would you like to see data for? ').lower()
     while city not in cities:
@@ -34,7 +35,7 @@ def get_filters():
     while month not in months:
         print('\nOops, there is no data for {}. Please check your spelling and try again'.format(month))
         month = input('Would you like to see data for January, February, March, April, May, or June. Type "none" for no filter. ').lower()
-        
+
     # get user input for day of week (all, monday, tuesday, ... sunday)
     day = input('\nYou can also filter by day. If you would like to do so, please type in the day: Monday, Tuesday, Wednesday, etc... Type "none" for no day filter. ').lower()
     while day not in days:
@@ -102,7 +103,7 @@ def time_stats(df):
 
     # display the most common month
     popular_month = df['Month'].mode()[0]
-    
+
     print('\nThe most popular month of travel was {}.'.format(popular_month))
 
     # display the most common day of week
@@ -117,7 +118,7 @@ def time_stats(df):
 
     #print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-   
+
 
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
@@ -128,14 +129,14 @@ def station_stats(df):
     # display most commonly used start station
     popular_start_station = df['Start Station'].mode()[0]
     start_station_count = len(df[df['Start Station'] == popular_start_station].index)
-    
+
     print('\nMost popular start station: {}\n'.format(popular_start_station))
     print('\nNumber of rentals starting at this station: {}\n'.format(start_station_count))
-    
+
     # display most commonly used end station
     popular_end_station = df['End Station'].mode()[0]
     end_station_count = len(df[df['End Station'] == popular_end_station].index)
-    
+
     print('\nMost popular end station: {}\n'.format(popular_end_station))
     print('\nNumber of rentals ending at this station: {}\n'.format(end_station_count))
 
@@ -185,21 +186,21 @@ def user_stats(df):
         earliest_yob = int(min(df['Birth Year']))
         latest_yob = int(max(df['Birth Year']))
         mode_yob = int(df['Birth Year'].mode()[0])
-        
+
         print('\nThe oldest bikeshare user was born in: ', earliest_yob)
         print('\nThe youngest bikeshare user was born in: ', latest_yob)
         print('\nMost bikeshare users were born in: ', mode_yob)
-        
+
     else:
         print('There is no information about bikeshare users\' birth years in this dataset.')
-        
+
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 def individual_trips(df):
      """Displays individual trip data by 5 trips until user decides to stop."""
-     
+
      yesorno = input('\nWould you like to see individual trip data? Yes or No? ').lower()
      for row in df.iterrows():
          if yesorno == 'yes':
@@ -207,7 +208,7 @@ def individual_trips(df):
              yesorno = input('\nWould you like to see the next trip? Yes or No? ').lower()
          else:
              break
-            
+
 def main():
     while True:
         city, month, day = get_filters()
