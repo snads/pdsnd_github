@@ -209,6 +209,7 @@ def individual_trips(df):
          else:
              break
 
+# this is the main function of this script. It calls all the above functions.
 def main():
     while True:
         city, month, day = get_filters()
